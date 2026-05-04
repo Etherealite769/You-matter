@@ -4,17 +4,12 @@ const path = require('path');
 const app = express();
 const PORT = 5000;
 
-// Serve static files (CSS, JS, images)
-app.use(express.static(path.join(__dirname, 'static')));
-
-// Set view engine for templates
-app.set('views', path.join(__dirname, 'templates'));
-app.set('view engine', 'html');
-app.engine('html', require('ejs').renderFile);
+// Serve static files from the root directory
+app.use(express.static(path.join(__dirname)));
 
 // Route for home page
 app.get('/', (req, res) => {
-    res.render('index.html');
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Start server
